@@ -71,7 +71,7 @@ def evaluate_structural_function(obj):
     elif isinstance(obj, list):
         return [evaluate_structural_function(x) for x in obj]
     elif isinstance(obj, tuple):
-        return (evaluate_structural_function(x) for x in obj)
+        return tuple(evaluate_structural_function(x) for x in obj)
     elif isinstance(obj, dict):
         return {evaluate_structural_function(k): evaluate_structural_function(v) for k, v in obj.items()}
     elif isinstance(obj, FrozenDict):

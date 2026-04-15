@@ -107,7 +107,7 @@ def jpath_update(obj, path, value):
     result_dct = jsonpath_expr.update(asdict(obj), value)
     if (name_object != type(result_dct)) and ((not is_dataclass(obj)) or isinstance(result_dct, dict)):
         assert isinstance(result_dct, dict)
-        result_obj = dacite.from_dict(name_object, result_dct)
+        result_obj = dacite.from_dict(name_object, result_dct, dacite.Config(check_types=False))
     else:
         result_obj = result_dct
     return result_obj

@@ -5,3 +5,4 @@ psycopg2-binary
 rdflib_sqlalchemy
 sqlalchemy-utils
 drawsvg[all]
+pyoxigraph

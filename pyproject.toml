@@ -1,22 +1,23 @@
 [build-system]
-requires = ["flit_core >=3.2,<4",  "requests==2.32.2"]
+requires = ["flit_core >=3.2,<4", "requests==2.32.2"]
 build-backend = "flit_core.buildapi"
 
 [project]
 name = "FunctionalMatch"
 authors = [
-    {name = "Giacomo Bergami", email = "bergamigiacomo@gmail.com"},
+    { name = "Giacomo Bergami", email = "bergamigiacomo@gmail.com" },
 ]
 #readme = "README.md"
 requires-python = "3.10"
 #classifiers = ["License :: OSI Approved :: MIT License"]
 dynamic = ["version", "description"]
 dependencies = [
-"dacite==1.8.1",
-"jsonpath_ng==1.7.0",
-"antlr4-python3-runtime==4.13.1",
-"psycopg2-binary",
-"rdflib_sqlalchemy",
-"sqlalchemy-utils",
-"drawsvg[all]"
+    "dacite==1.8.1",
+    "jsonpath_ng==1.7.0",
+    "antlr4-python3-runtime==4.13.1",
+    "psycopg2-binary",
+    "rdflib_sqlalchemy",
+    "sqlalchemy-utils",
+    "drawsvg[all]",
+    "pyoxigraph"
 ]
