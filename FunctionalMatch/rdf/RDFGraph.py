@@ -638,16 +638,16 @@ class RDFGraph:
             yield row.asdict()
 
     def single_edge_src_multipoint(self, src, src_spec, edge_type, dst):
-        q = """
+        q = f"""
          SELECT DISTINCT ?src ?edge_type ?dst ?src_label ?src_spec ?dst_label
-         WHERE {
+         WHERE {{
              ?src ?edge_type ?dst.
-             ?src parmenides:entryPoint ?src_entry.
+             ?src {self.name}:entryPoint ?src_entry.
              ?src_entry rdfs:label ?src_label.
-             ?src parmenides:hasAdjective ?src_spec_node.
+             ?src {self.name}:hasAdjective ?src_spec_node.
              ?src_spec_node rdfs:label ?src_spec.
              ?dst rdfs:label ?dst_label .
-         }"""
+         }}"""
         bindings = {}
         srcBool = srcSpecBool = edgeBool = dstBool = False
         if not src.startswith("^"):
@@ -680,18 +680,18 @@ class RDFGraph:
             yield k
 
     def single_edge_dst_binary_capability(self, src, edge_type, verb, subj, obj):
-        q = """
+        q = f"""
          SELECT DISTINCT ?src ?edge_type ?dst ?src_label ?verb ?subj ?obj
-         WHERE {
+         WHERE {{
              ?src ?edge_type ?dst.
-             ?dst parmenides:entryPoint ?verb_e.
+             ?dst {self.name}:entryPoint ?verb_e.
              ?verb_e rdfs:label ?verb.
-             ?dst parmenides:subject ?subj_e.
+             ?dst {self.name}:subject ?subj_e.
              ?subj_e rdfs:label ?subj.
-             ?dst parmenides:d_object ?obj_e.
+             ?dst {self.name}:d_object ?obj_e.
              ?obj_e rdfs:label ?obj.
              ?src rdfs:label ?src_label.
-         }"""
+         }}"""
         bindings = {}
         srcBool = edgeBool = verbBool = subjBool = objBool = False
         if not src.startswith("^"):
@@ -730,16 +730,16 @@ class RDFGraph:
             yield k
 
     def single_edge_dst_unary_capability(self, src, edge_type, verb, subj):
-        q = """
+        q = f"""
          SELECT DISTINCT ?src ?edge_type ?dst ?src_label ?verb ?subj
-         WHERE {
+         WHERE {{
              ?src ?edge_type ?dst.
-             ?dst parmenides:entryPoint ?verb_e.
+             ?dst {self.name}:entryPoint ?verb_e.
              ?verb_e rdfs:label ?verb.
-             ?dst parmenides:subject ?subj_e.
+             ?dst {self.name}:subject ?subj_e.
              ?subj_e rdfs:label ?subj.
              ?src rdfs:label ?src_label.
-         }"""
+         }}"""
         bindings = {}
         srcBool = edgeBool = verbBool = subjBool = False
         if not src.startswith("^"):
