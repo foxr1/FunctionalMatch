@@ -433,7 +433,16 @@ class RDFGraph:
         # only need read access; fall back to read-only if the write lock is
         # already held (OSError: LOCK: Resource temporarily unavailable).
         store_path = getattr(self, '_store_path', None)
-        self.graph = pyoxigraph.Store(store_path) if store_path else pyoxigraph.Store()
+        if store_path:
+            try:
+                self.graph = pyoxigraph.Store(store_path)
+            except OSError as e:
+                if "LOCK" in str(e):
+                    self.graph = pyoxigraph.Store.read_only(store_path)
+                else:
+                    raise
+        else:
+            self.graph = pyoxigraph.Store()
         self.names = {}
         self.relationships = {}
         self.classes = {}
